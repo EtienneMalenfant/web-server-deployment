@@ -3,28 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Markdown to HTML</title>
+  <title>Server deployment guide</title>
   <!-- GitHub Markdown CSS -->
   <link rel="stylesheet" href="./css/github-markdown-dark.css">
-  <style>
-    html {
-        background-color: #131821;
-    }
-    .markdown-body {
-      box-sizing: border-box;
-      min-width: 200px;
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 45px;
-    }
-    @media (max-width: 767px) {
-		.markdown-body {
-			padding: 15px;
-		}
-	}
-  </style>
+  <link rel="stylesheet" href="./css/main.css">
 </head>
 <article class="markdown-body" id="content"></article>
+<footer>
+  <p>Etienne Malenfant 2024</p>
+</footer>
 <script>
     const markdownContent = fetch('./src/deployment-instructions.md')
         .then(response => response.text())
