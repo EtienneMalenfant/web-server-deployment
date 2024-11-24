@@ -1,100 +1,108 @@
 # How to deploy your own web server
 
-### Prerequisite
+### Prerequisites
 
-- Have an ubuntu server (with sudo access)
-  - Can be purchased with provider (OVH, Amazon, Azure, etc.)
+- Have an Ubuntu server (with sudo access)
+  - Can be purchased from a provider (e.g., OVH, Amazon, Azure)
   - Can be done with an old PC at home
 - *(Optional)* Have a domain name
 
 ## Steps to follow
 
-1. Initial setup and installation
-   1. Apache installation
-   2. Customize website
-2. Secure your server
-   1. UFW
-   2. Fail2Ban
-   3. HTTPS
+1. Initial Setup and Installation
+   1. Install Apache
+   2. Customize your website
+2. Secure Your Server
+   1. Set up UFW
+   2. Enable HTTPS
 
 ### Inital setup
 
-Firstly, enter you server in command line.
+First, connect to your server via the command line. I recommend using SSH.
 
 #### Apache installation
-> The app that let you host a website
+> Apache is the software that allows you to host a website.
 
-Install apache
-```
+Install Apache
+```bash
 sudo apt install apache2
 ```
 
-In a web browser, enter the server ip adress. You should see this :
+In a web browser, enter your server's IP address. You should see a page like this :
 ![apache default page screenshot](../assets/apache-default.png)
 
-##### Customise website
+##### Customize Your Website
+> The default website location is `/var/www/html/`
 
 You can now import your website in the `/var/www/` directory.
-Example importing from github
-```
+For example, importing from GitHub:
+```bash
 cd /var/www
-git clone git@github.com/MyUsername/MyRepo.git
+git clone git@github.com:MyUsername/MyRepo.git
 ```
-###### Updating the directory
+###### Update the Directory
 
-Edit the config file for your website directoy with 
-`sudo nano /etc/apache2/sites-available/000-default.conf`
-Locate the line `DocumentRoot /var/www/html`, and update the directory. (example: `/var/www/my-website-dir`)
+Edit the config file for your website directory
+```bash
+sudo nano /etc/apache2/sites-available/000-default.conf
+```
 
-#### Configure a domain name for your website
+Locate the line `DocumentRoot /var/www/html`, and update the directory. (e.g., `/var/www/my-website-dir`)
 
-1. Buy a domain name (I use namecheap)
-2. In you domain name provider website
+#### Configure a Domain Name for Your Website
+
+1. Purchase a domain name (e.g., from Namecheap)
+2. On your domain name provider's website:
    1. Manage your domain name
-   2. Link your domain to your server's ip adress
-   3. Enter your domain in a web browser, you should see your website
-
+   2. Link your domain to your server's IP address
+   3. Enter your domain in a web browser to confirm your website is accessible
+3. Configure Apache:
+   1. Edit the Apache configuration file: `sudo nano /etc/apache2/sites-available/000-default.conf`
+   2. Locate the line: `#ServerName webiste-example.com`
+   3. Uncomment the line ny removing the `#` and update it with your domain name
+   4. Reload Apache: `sudo systemctl reload apache2`
 ---
 ### Securing your server
 
-#### UFW
-> A firewall used to block every port except the ones we use
+#### UFW firewall
+> A firewall to block unused ports.
 
-Install ufw
-```
+Install UFW
+```bash
 sudo apt install ufw
 ```
 
-Add the port 80 and 443
-```
+Allow essential ports (HTTP and HTTPS)
+```bash
 sudo ufw allow 80/tcp
 sudo ufw allow 443/tcp
 ```
 
-Activate the firewall and reboot
-```
+Activate the firewall and reboot the server
+```bash
 sudo ufw enable
 reboot
 ```
 
 #### HTTPS
-> Provide encrypted connection to our website
+> Provides encrypted connections to your website
 
-We'll be using certbot to create our certificate
+We'll use Certbot to generate an SSL certificate.
 
-Install certbot
-```
+Install Certbot
+```bash
 sudo apt install certbot python3-certbot-apache
 ```
 
-###### Generate the SSL certificate
-```
+###### Generate the SSL Certificate
+Run Certbot
+```bash
 sudo certbot --apache
 ```
 
-Answer the questions
-1. Provide email adress
-2. Anwser yes to term of service
-3. Yes/no to sharing your email
+Answer the prompts
+1. Provide your email address
+2. Accept the terms of service
+3. Choose whether to share your email address
    
-Check for sucess and reload your website, your url should look like this: `https://mywebsite.com` 
+Check for success, then reload your website. Your URL should now look like this: `https://mywebsite.com` 
