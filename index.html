@@ -26,7 +26,7 @@
 </head>
 <article class="markdown-body" id="content"></article>
 <script>
-    const markdownContent = fetch('deployment-instructions.md')
+    const markdownContent = fetch('./src/deployment-instructions.md')
         .then(response => response.text())
         .then(text => {
             const markdownContent = text;
