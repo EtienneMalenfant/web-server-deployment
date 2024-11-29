@@ -4,4 +4,4 @@ An example website showing the steps to deploy a website
 ---
 
 
-[Link to the presentation]([207.134.243.96:62495](https://etiennemalenfant.pro/))
+[Link to the presentation](https://etiennemalenfant.pro/)
