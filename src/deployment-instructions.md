@@ -47,12 +47,15 @@ Edit the config file for your website directory
 sudo nano /etc/apache2/sites-available/000-default.conf
 ```
 
+Locate the line `DocumentRoot /var/www/html`, and update the directory. (e.g., `/var/www/my-website-dir`)
+
 Reload Apache
 ```
 sudo systemctl reload apache2
 ```
 
-Locate the line `DocumentRoot /var/www/html`, and update the directory. (e.g., `/var/www/my-website-dir`)
+In a browser, confirm that your website is working
+
 
 #### Configure a Domain Name for Your Website
 
@@ -61,11 +64,7 @@ Locate the line `DocumentRoot /var/www/html`, and update the directory. (e.g., `
    1. Manage your domain name
    2. Link your domain to your server's IP address
    3. Enter your domain in a web browser to confirm your website is accessible
-3. Configure Apache:
-   1. Edit the Apache configuration file: `sudo nano /etc/apache2/sites-available/000-default.conf`
-   2. Locate the line: `#ServerName webiste-example.com`
-   3. Uncomment the line ny removing the `#` and update it with your domain name
-   4. Reload Apache: `sudo systemctl reload apache2`
+
 ---
 ## Securing your server
 
@@ -77,10 +76,11 @@ Install UFW
 sudo apt install ufw
 ```
 
-Allow essential ports (HTTP and HTTPS)
+Allow essential ports
 ```bash
-sudo ufw allow 80/tcp
-sudo ufw allow 443/tcp
+sudo ufw allow 80/tcp  # HTTP
+sudo ufw allow 443/tcp # HTTPS
+sudo ufw allow 22/tcp  # SSH
 ```
 
 Activate the firewall and reboot the server
