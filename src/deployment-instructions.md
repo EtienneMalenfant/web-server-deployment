@@ -9,11 +9,11 @@
 
 ## Steps to follow
 
-1. Initial Setup and Installation
+1. Initial Setup
    1. Install Apache
-   2. Customize your website
+   2. Upload your website
 2. Secure Your Server
-   1. Set up UFW
+   1. Set up a firewall
    2. Enable HTTPS
 
 ### Inital setup
@@ -31,7 +31,7 @@ sudo apt install apache2
 In a web browser, enter your server's IP address. You should see a page like this :
 ![apache default page screenshot](../assets/apache-default.png)
 
-##### Customize Your Website
+##### Upload Your Website
 > The default website location is `/var/www/html/`
 
 You can now import your website in the `/var/www/` directory.
