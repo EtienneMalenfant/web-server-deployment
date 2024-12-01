@@ -5,7 +5,7 @@
 - Have an Ubuntu server (with sudo access)
   - Can be purchased from a provider (e.g., OVH, Amazon, Azure)
   - Can be done with an old PC at home
-- *(Optional)* Have a domain name
+- Have a domain name
 
 ## Steps to follow
 
@@ -47,6 +47,11 @@ Edit the config file for your website directory
 sudo nano /etc/apache2/sites-available/000-default.conf
 ```
 
+Reload Apache
+```
+sudo systemctl reload apache2
+```
+
 Locate the line `DocumentRoot /var/www/html`, and update the directory. (e.g., `/var/www/my-website-dir`)
 
 #### Configure a Domain Name for Your Website
@@ -62,7 +67,7 @@ Locate the line `DocumentRoot /var/www/html`, and update the directory. (e.g., `
    3. Uncomment the line ny removing the `#` and update it with your domain name
    4. Reload Apache: `sudo systemctl reload apache2`
 ---
-### Securing your server
+## Securing your server
 
 #### UFW firewall
 > A firewall to block unused ports.
